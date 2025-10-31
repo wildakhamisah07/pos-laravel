@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Alert;
+// use Alert;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LoginController extends Controller
 {
@@ -21,6 +22,11 @@ class LoginController extends Controller
         }
         //kalo login gagal / tdk berhasil
         Alert::warning('Upsssss', 'Invalid Credentials');
-        return back()->withInput($request->onlly('email'));
+        return back()->withInput($request->only('email'));
+    }
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->to('/');
     }
 }

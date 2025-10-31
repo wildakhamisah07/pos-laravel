@@ -12,8 +12,16 @@ use Brick\Math\Internal\Calculator;
 // });
 
 Route::get('/', [LoginController::class, 'index']);
+Route::get('login', [LoginController::class, 'index'])->name('login');
+
 Route::post('action-login', [\App\Http\Controllers\LoginController::class, 'actionLogin'])->name('action-login');
-Route::get('belajar', [\App\Http\Controllers\BelajarController::class, 'index']);
+Route::get('logout', [\App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('dashboard', \App\Http\Controllers\DashboardController::class);
+});
+
+Route::get('belajar', [\App\Http\Controllers\BelajarController::class, 'index'])->name('belajar.index');
 Route::get('belajar/tambah', [\App\Http\Controllers\BelajarController::class, 'tambah'])->name('belajar.tambah');
 Route::post('storeTambah', [\App\Http\Controllers\BelajarController::class, 'storeTambah'])->name('storeTambah');
 
