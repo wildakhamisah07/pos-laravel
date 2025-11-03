@@ -27,7 +27,7 @@
   <link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: NiceAdmin
@@ -61,24 +61,25 @@
 
     <section class="section">
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-10">
 
           <div class="card">
-            <div class="card-body">
+            {{-- <div class="card-body">
               <h5 class="card-title">Example Card</h5>
               <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
-            </div>
+            </div> --}}
+            @yield('content')
           </div>
 
         </div>
 
-        <div class="col-lg-6">
+        <div class="col-lg-10">
 
           <div class="card">
-            <div class="card-body">
+            {{-- <div class="card-body">
               <h5 class="card-title">Example Card</h5>
               <p>This is an examle page with no contrnt. You can use it as a starter for your custom pages.</p>
-            </div>
+            </div> --}}
           </div>
 
         </div>

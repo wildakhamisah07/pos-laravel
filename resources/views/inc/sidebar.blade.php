@@ -15,74 +15,74 @@
         </a>
         <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
           <li>
-            <a href="components-alerts.html">
-              <i class="bi bi-circle"></i><span>Alerts</span>
+            <a href="{{ route('user.index')}}">
+              <i class="bi bi-circle"></i><span>User</span>
             </a>
           </li>
           <li>
-            <a href="components-accordion.html">
+            {{-- <a href="components-accordion.html">
               <i class="bi bi-circle"></i><span>Accordion</span>
-            </a>
+            </a> --}}
           </li>
           <li>
-            <a href="components-badges.html">
+            {{-- <a href="components-badges.html">
               <i class="bi bi-circle"></i><span>Badges</span>
-            </a>
+            </a> --}}
           </li>
           <li>
-            <a href="components-breadcrumbs.html">
+            {{-- <a href="components-breadcrumbs.html">
               <i class="bi bi-circle"></i><span>Breadcrumbs</span>
-            </a>
+            </a> --}}
           </li>
           <li>
-            <a href="components-buttons.html">
+            {{-- <a href="components-buttons.html">
               <i class="bi bi-circle"></i><span>Buttons</span>
-            </a>
+            </a> --}}
           </li>
           <li>
-            <a href="components-cards.html">
+            {{-- <a href="components-cards.html">
               <i class="bi bi-circle"></i><span>Cards</span>
-            </a>
+            </a> --}}
           </li>
           <li>
-            <a href="components-carousel.html">
+            {{-- <a href="components-carousel.html">
               <i class="bi bi-circle"></i><span>Carousel</span>
-            </a>
+            </a> --}}
           </li>
           <li>
-            <a href="components-list-group.html">
+            {{-- <a href="components-list-group.html">
               <i class="bi bi-circle"></i><span>List group</span>
-            </a>
+            </a> --}}
           </li>
           <li>
-            <a href="components-modal.html">
+            {{-- <a href="components-modal.html">
               <i class="bi bi-circle"></i><span>Modal</span>
-            </a>
+            </a> --}}
           </li>
           <li>
-            <a href="components-tabs.html">
+            {{-- <a href="components-tabs.html">
               <i class="bi bi-circle"></i><span>Tabs</span>
-            </a>
+            </a> --}}
           </li>
           <li>
-            <a href="components-pagination.html">
+            {{-- <a href="components-pagination.html">
               <i class="bi bi-circle"></i><span>Pagination</span>
-            </a>
+            </a> --}}
           </li>
           <li>
-            <a href="components-progress.html">
+            {{-- <a href="components-progress.html">
               <i class="bi bi-circle"></i><span>Progress</span>
-            </a>
+            </a> --}}
           </li>
           <li>
-            <a href="components-spinners.html">
+            {{-- <a href="components-spinners.html">
               <i class="bi bi-circle"></i><span>Spinners</span>
-            </a>
+            </a> --}}
           </li>
           <li>
-            <a href="components-tooltips.html">
+            {{-- <a href="components-tooltips.html">
               <i class="bi bi-circle"></i><span>Tooltips</span>
-            </a>
+            </a> --}}
           </li>
         </ul>
       </li><!-- End Components Nav -->
