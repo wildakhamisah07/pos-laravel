@@ -1,16 +1,20 @@
 cara buat migrations
 1.php artisan make:model settings -m
-
+==============================================
 cara migrasi k db
 -php artisan migrate
 kalau utk refresh ulang, isi tabelnya hilang
 -php artisan migrate:fresh
-
+==============================================
 cara meilhat didb
 php artisan db:seed --class=UserSeeder
-
+lalu bisa hapus semua user dan d localhost dan setelah itu login pake akun baru dgn sandi yg dibuat d db vcs.
+================================================
 buat controlleran baru
 php artisan make:controller LoginController
-
+===================================================
 php artisan make:controller DashboardController --resource 
 resource= semua method yg kita butuhin. dibuatin otomatis
+=========================================================
+php artisan storage:link = utk nambah storage link (gambar)
+==========================================================

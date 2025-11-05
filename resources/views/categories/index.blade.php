@@ -1,0 +1,34 @@
+@extends('app')
+@section('content')
+@section('title','Master Data Categories')
+{{-- add=utk ngecek == vardump--}}
+{{-- @add($users) --}}
+
+<div class="d-flex justify-content-end my-2">
+    <a href="{{ route('category.create') }}" class="btn btn-primary">Add Category</a>
+</div>
+<table class="table table-bordered">
+    <tr>
+        <th>No.</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    @foreach ( $datas as $i => $data )
+
+
+    <tr>
+        {{-- //utk nambah angka 1-10(sesuai data pada no) --}}
+        <td>{{$i + 1}}</td>
+        <td>{{$data ->category_name}}</td>
+        <td>
+            <a href="{{ route('category.edit',$data->id) }}" class="btn btn-warning btn-sm">Edit</a>
+            <form action="{{ route('category.destroy',$data->id) }}" method="post" onsubmit="return confirm('YAKIN MAU INGIN DELETE DEKS?')" class="d-inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+        </td>
+    </tr>
+    @endforeach
+</table>
+@endsection

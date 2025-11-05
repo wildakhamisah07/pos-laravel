@@ -15,7 +15,8 @@ class UserController extends Controller
     {
         // $users = \App\Models\User::all(); === utk menampilkan semua data.
         $users = \App\Models\User::orderBy('id', 'DESC')->get();
-        return view('user.index', compact('users'));
+        $title = 'Data User';
+        return view('user.index', compact('users', 'title'));
     }
 
     /**

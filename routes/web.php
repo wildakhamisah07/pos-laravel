@@ -18,7 +18,7 @@ Route::post('action-login', [\App\Http\Controllers\LoginController::class, 'acti
 Route::get('logout', [\App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth'])->group(function () {
-    // Route::resource('dashboard', \App\Http\Controllers\DashboardController::class);
+    Route::resource('dashboard', \App\Http\Controllers\DashboardController::class);
     // Route::get('user', [\App\Http\Controllers\UserController::class, 'index'])->name('user.index');
     // Route::get('user/create', [\App\Http\Controllers\UserController::class, 'create'])->name('user.create');
     // Route::post('user/store', [\App\Http\Controllers\UserController::class, 'store'])->name('user.store');
@@ -28,6 +28,10 @@ Route::middleware(['auth'])->group(function () {
 
     // ini cara singkat sudah mewakili semua yg ada diaatas.
     Route::resource('user', \App\Http\Controllers\UserController::class);
+    Route::resource('category', \App\Http\Controllers\CategoriesController::class);
+    Route::resource('product', \App\Http\Controllers\ProductController::class);
+    Route::resource('profile', \App\Http\Controllers\ProfileController::class);
+    Route::post('change-password', [\App\Http\Controllers\ProfileController::class, 'changePassword'])->name('profile.change-password');
 });
 
 Route::get('belajar', [\App\Http\Controllers\BelajarController::class, 'index'])->name('belajar.index');
