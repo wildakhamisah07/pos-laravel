@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -17,7 +19,8 @@ class ProfileController extends Controller
     {
         $title = "Profile";
         $user = Auth::user();
-        return view('profile.index', compact('title', 'user'));
+        $userDetail = Auth::user()->userDetail;
+        return view('profile.index', compact('title', 'user', 'userDetail'));
     }
     public function changePassword(Request $request)
     {
@@ -38,6 +41,55 @@ class ProfileController extends Controller
         ]);
         alert()->success('Success', 'The Change Password Success bro !!!');
         return back();
+    }
+
+    public function changeProfile(Request $request)
+    {
+
+        $user = Auth::user();
+        $photoPath = "";
+
+        //photo
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            if ($user->userDetail && $user->userDetail->photo) {
+                File::delete(public_path('storage/' . $user->userDetail->photo));
+            }
+            $photoPath = $photo->store('profile', 'public'); //storage/app/publice
+        }
+        //upsert = update dan insert dr laravel. jika ada datany ngk ada maka d insert. tp jika sudah ada maka akan di update
+        try {
+            UserDetail::upsert(
+                [
+                    //ini utk insert
+                    [
+                        'user_id' => $user->id,
+                        'about' => $request->about,
+                        'company' => $request->company,
+                        'job' => $request->job,
+                        'address' => $request->address,
+                        'phone' => $request->phone,
+                        'photo' => $photoPath ?? ($user->userDetail->photo ?? '')
+
+                    ],
+                ],
+                //pengecekan data unique nya
+                ['user_id'], //ini si unique
+                [
+                    'phone',
+                    'about',
+                    'company',
+                    'job',
+                    'address',
+                    'photo'
+                ]
+            );
+            alert()->success('Success', 'Edit Profile Success CUYYY....');
+            return redirect()->to('profile');
+        } catch (\Throwable $th) {
+            alert()->error('error', $th->getMessage());
+            return redirect()->to('profile');
+        }
     }
 
 

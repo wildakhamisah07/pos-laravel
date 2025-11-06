@@ -90,6 +90,8 @@
 // document.querySelector(".catergory-btn");
 
 let currentCategory = "all";
+ let products =[];
+
 function filterCategory(category, event) {
   currentCategory = category;
   let buttons = document.querySelectorAll(".category-btn");
@@ -109,9 +111,15 @@ function filterCategory(category, event) {
   renderProducts();
 }
 
-function renderProducts(searchProduct = "") {
+async function renderProducts(searchProduct = "") {
   const productGrid = document.getElementById("productGrid");
   productGrid.innerHTML = "";
+
+
+//BERAWAL DR AJAX JVSC
+const response = await fetch("/order/get-products");
+products = await response.json();
+
   //filter
   const filtered = products.filter((p) => {
     //shorthand/ternery
@@ -194,7 +202,7 @@ function renderCart() {
         <button class="btn btn-sm btn-danger ms-3" onclick="removeItem(${item.id})">
             <i class="bi bi-trash"></i>
         </button>
-        
+
       </div>
     `;
     cartContainer.appendChild(div);
@@ -237,7 +245,7 @@ function updateTotal() {
   document.getElementById("tax_value").value =tax;
   document.getElementById("total_value").value =total;
 
-  
+
   // console.log(subtotal);
   // console.log(tax);
   // console.log(total);
