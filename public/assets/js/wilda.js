@@ -117,7 +117,7 @@ async function renderProducts(searchProduct = "") {
 
 
 //BERAWAL DR AJAX JVSC
-const response = await fetch("/order/get-products");
+const response = await fetch("/get-products");
 products = await response.json();
 
   //filter
@@ -140,7 +140,7 @@ products = await response.json();
     col.className = "col-md-4 col-sm-6";
     col.innerHTML = `<div class="card product-card" onclick="addToCart(${product.id})">
         <div class="product-img">
-            <img src="../${product.product_photo}" alt="" width="100%">
+            <img src="/storage/${product.product_photo}" alt="" width="100%">
         </div>
         <div class="card-body">
             <span class="badge bg-secondary badge-category">${product.category_name}</span>

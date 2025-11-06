@@ -53,11 +53,12 @@ class OrderController extends Controller
     {
         try {
             $products = Product::with('category')->get();
-            return response()->json([
-                'message' => 'Fetch Product Success',
-                'status' => true,
-                'data' => $products,
-            ]);
+            return response()->json($products);
+            // return response()->json([
+            //     'message' => 'Fetch Product Success',
+            //     'status' => true,
+            //     'data' => $products,
+            // ]);
         } catch (\Throwable $th) {
             return response()->json([
                 'message' => 'Fetch Product Failed',

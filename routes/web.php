@@ -35,7 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('change-password', [\App\Http\Controllers\ProfileController::class, 'changePassword'])->name('profile.change-password');
     Route::post('change-profile', [\App\Http\Controllers\ProfileController::class, 'changeProfile'])->name('profile.change-profile');
     //-----------------------------------------------------ORDER--------------------------------------------------------------------//
-    Route::get('order/get-products', [\App\Http\Controllers\ProductController::class, 'getProducts'])->name('order.get-products');
+    Route::get('get-products', [\App\Http\Controllers\OrderController::class, 'getProducts'])->name('get-products');
 });
 
 Route::get('belajar', [\App\Http\Controllers\BelajarController::class, 'index'])->name('belajar.index');
