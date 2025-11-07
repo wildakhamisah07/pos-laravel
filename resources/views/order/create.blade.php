@@ -128,7 +128,10 @@
   </div>
 </div>
 
-
+<script
+  type="text/javascript"
+  src="https://app.sandbox.midtrans.com/snap/snap.js"data-client-key="{{ config('midtrans.client_key') }}">
+</script>
 
     <script src="{{ asset('assets/js/wilda.js') }}">
     </script>

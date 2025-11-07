@@ -274,7 +274,6 @@ async function processPayment() {
 
 
 async function handlePayment(){
-    alert("Rawwwr");
     const paymentMethod = document.getElementById("payment_method").value;
   const order_code = document.querySelector('.orderNumber').textContent.trim();
   const subtotal = document.querySelector('#subtotal_value').value.trim();
@@ -306,7 +305,7 @@ async function handlePayment(){
   }else if(paymentMethod=='cashless')
     {
         try {
-        const res = await fetch("/order/cashless", {
+        const res = await fetch("/cashless", {
           method: "POST",
           headers: {
              "Content-Type": "application/json",
