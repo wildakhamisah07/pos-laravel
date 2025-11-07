@@ -118,13 +118,13 @@ async function renderProducts(searchProduct = "") {
 
 //BERAWAL DR AJAX JVSC
 const response = await fetch("/get-products");
-products = await response.json();
+products = await response.json(); //[{id:1}]
 
   //filter
   const filtered = products.filter((p) => {
     //shorthand/ternery
     const matchCategory =
-      currentCategory === "all" || p.category_name === currentCategory;
+      currentCategory === "all" || p.category.category_name === currentCategory;
     const matchSearch = p.product_name.toLowerCase().includes(searchProduct);
     return matchCategory && matchSearch;
   });
@@ -143,7 +143,7 @@ products = await response.json();
             <img src="/storage/${product.product_photo}" alt="" width="100%">
         </div>
         <div class="card-body">
-            <span class="badge bg-secondary badge-category">${product.category_name}</span>
+            <span class="badge bg-secondary badge-category">${product.category.category_name}</span>
             <h6 class="card-tittle mt-2 mb-2">${product.product_name}</h6>
             <p class="card-text text-primary fw-bold">Rp. ${product.product_price}</p>
         </div>
@@ -192,8 +192,9 @@ function renderCart() {
       "cart-items d-flex justify-content-between align-items-center mb-2";
     div.innerHTML = `
       <div>
-        <strong>${item.product_name}</strong>
-        <small>${item.product_price}</small>
+      <img src='/storage/${item.product_photo}' alt='tess' width='100>
+        <strong class='mb-1'>${item.product_name}</strong>
+        <small class='text-muted'>Rp.${item.product_price.toLocaleString('id-ID')}</small>
       </div>
       <div class="d-flex align-items-center">
         <button class="btn btn-outline-secondary me-2" onclick="changeQty(${item.id}, -1)">-</button>
@@ -258,35 +259,74 @@ document.getElementById("clearCart").addEventListener("click", function (e) {
 });
 
 async function processPayment() {
-  if (cart.length === 0) {
-    alert("cart Masih Kosong");
-    return;
-  }
+//   if (cart.length === 0) {
+//     alert("cart Masih Kosong");
+//     return;
+//   }
+  const modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+  modal.show();
+
+
+// document.querySelector(".btn-process").onclick = async function(){
+//     handlePayment(paymentMethod);
+
+};
+
+
+async function handlePayment(){
+    alert("Rawwwr");
+    const paymentMethod = document.getElementById("payment_method").value;
   const order_code = document.querySelector('.orderNumber').textContent.trim();
   const subtotal = document.querySelector('#subtotal_value').value.trim();
   const tax = document.querySelector('#tax_value').value.trim();
   const grandTotal = document.querySelector('#total_value').value.trim();
 
-  try {
-    const res = await fetch("add-pos.php?payment", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ cart, order_code,subtotal,tax,grandTotal }),
-    });
-    const data = await res.json();
-    if (data.status == "success") {
-      alert("Transaction success");
-      window.location.href = "print.php";
-    } else {
-      alert("transaction failed", data.message);
-    }
-    // const data = await res.json();
-  } catch (error) {
-    alert("transaction faailed");
-    console.error(error);
+  if (paymentMethod=='cash') {
+      try {
+        const res = await fetch("/order", {
+          method: "POST",
+          headers: {
+             "Content-Type": "application/json",
+             "X-CSRF-TOKEN":document.querySelector('meta[name="csrf-token"]').content
+            },
+          body: JSON.stringify({ cart, order_code,subtotal,tax,grandTotal }),
+        });
+        const data = await res.json();
+        if (data.status == "success") {
+          alert("Transaction success");
+          window.location.href = "order";
+        } else {
+          alert("transaction failed", data.message);
+        }
+        // const data = await res.json();
+      } catch (error) {
+        alert("transaction failed");
+        console.error(error);
+      }
+  }else if(paymentMethod=='cashless')
+    {
+        try {
+        const res = await fetch("/order/cashless", {
+          method: "POST",
+          headers: {
+             "Content-Type": "application/json",
+             "X-CSRF-TOKEN":document.querySelector('meta[name="csrf-token"]').content
+            },
+          body: JSON.stringify({ cart, order_code,subtotal,tax,grandTotal }),
+        });
+        const data = await res.json();
+        if (data.status == "success") {
+            window.snap.pay(data.snapToken);
+        } else {
+          alert("transaction failed", data.message);
+        }
+        // const data = await res.json();
+      } catch (error) {
+        alert("transaction failed");
+        console.error(error);
+      }
   }
 }
-
 // useEffect(()=>{,[]})
 // DomContentLoaded : akan meload function pertama kali
 renderProducts();

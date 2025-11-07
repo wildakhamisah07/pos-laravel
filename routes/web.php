@@ -36,6 +36,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('change-profile', [\App\Http\Controllers\ProfileController::class, 'changeProfile'])->name('profile.change-profile');
     //-----------------------------------------------------ORDER--------------------------------------------------------------------//
     Route::get('get-products', [\App\Http\Controllers\OrderController::class, 'getProducts'])->name('get-products');
+    Route::post('cashless', [\App\Http\Controllers\OrderController::class, 'paymentCashless'])->name('cashless');
 });
 
 Route::get('belajar', [\App\Http\Controllers\BelajarController::class, 'index'])->name('belajar.index');

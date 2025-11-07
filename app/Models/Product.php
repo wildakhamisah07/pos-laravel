@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
+
 {
     protected $fillable = [
         'category_id',
@@ -14,6 +15,37 @@ class Product extends Model
         'product_description',
         'is_active',
     ];
+    //append = menambhkn atribut baru/propertis bru
+    protected $appends = [
+        'is_active_class',
+        'is_active_text'
+    ];
+
+    public function getIsActiveClassAttribute()
+    {
+        switch ($this->is_active) {
+            case '1':
+                return "badge text-bg-primary";
+                break;
+
+            default:
+                return "badge text-bg-warning";
+                break;
+        }
+    }
+    public function getIsActiveTextAttribute()
+    {
+        switch ($this->is_active) {
+            case '1':
+                return "Publish";
+                break;
+
+            default:
+                return "Draft";
+                break;
+        }
+    }
+
     //one to many : belongsTo
     public function category()
     {
